@@ -1,0 +1,37 @@
+---
+title: "Receiving IP-addresses from SurveyMonkey and Plotting them."
+output: html_notebook
+---
+
+*Robert-Jan ten Hove*^1^   
+^1.^ EDQM, Strasbourg, France  
+  
+> Retreiving a list of IP-addresses from a 'SurveyMonkeySurvey'. This code plots the IP-addresses on a map of the world and Europe. Obviously, it has not value when a participants sends the survey via VPN.  
+
+```{r}
+setwd("~/Documents/Workspace/R-project/IPaddress_R")
+
+library(readxl) #import from Excel
+library(RDSTK) # IP to location
+library(rworldmap) #load worldmap
+
+## load data
+BPTS030AoR <- read_excel("Sheet_1.xls")
+View(BPTS030AoR)
+
+##################
+# ip to location
+loc <- ip2coordinates(ip = paste(BPTS030AoR$IP_Address, collapse=", "))
+
+# plot WORLD
+par(mar = rep(0, 4)) 
+plot(getMap())
+with(loc, points(x = longitude, y = latitude, col = "red", pch = 19))
+
+# plot EUROPE
+newmap <- getMap(resolution = "low")
+plot(newmap, xlim = c(-20, 59), ylim = c(35, 71), asp = 1)
+points(loc$longitude, loc$latitude, col = "red", pch = 19)
+```
+
+
