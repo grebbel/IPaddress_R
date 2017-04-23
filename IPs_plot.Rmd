@@ -22,7 +22,7 @@ head(survey)
 ##################
 # ip to location
 loc <- ip2coordinates(ip = paste(survey$IP_Address, collapse=", "))
-
+head(loc)
 # plot WORLD
 par(mar = rep(0, 4)) 
 plot(getMap())
