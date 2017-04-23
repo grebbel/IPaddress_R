@@ -17,7 +17,7 @@ library(rworldmap) #load worldmap
 
 ## load data
 BPTS030AoR <- read_excel("Sheet_1.xls")
-View(BPTS030AoR)
+BPTS030AoR
 
 ##################
 # ip to location
